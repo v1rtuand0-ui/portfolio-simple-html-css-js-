@@ -1,0 +1,609 @@
+/* ==========================================================
+   PORTOFOLIO — Virtuando Jagad Saputrana (FINAL FIX)
+
+   Daftar isi:
+   1. Variabel (design token)
+   2. Reset & dasar
+   3. Komponen umum (container, ikon, brand, tombol)
+   4. Navbar
+   5. Hero
+   6. About
+   7. Footer
+   8. Section tambahan (Projects / Education nanti)
+   9. State class (disiapkan untuk JS)
+   10. Responsif
+   11. Aksesibilitas
+   ========================================================== */
+
+
+/* ==========================================================
+   1. VARIABEL
+   ========================================================== */
+:root {
+  /* Warna */
+  --color-primary: #0a84e6;
+  --color-primary-dark: #0768b8;
+  --color-hero-top: #0a84e6;
+  --color-hero-bottom: #002f66;
+  --color-white: #ffffff;
+  --color-bg-soft: #e6e6e6;
+  --color-text: #111111;
+  --color-light-hover: #e8f3fd;
+
+  /* Font */
+  --font-main: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Ukuran teks (fluid) */
+  --fs-small: clamp(0.62rem, 0.4rem + 0.6vw, 0.85rem);
+  --fs-body: clamp(0.78rem, 0.55rem + 0.9vw, 1.05rem);
+  --fs-nav: clamp(0.75rem, 0.5rem + 0.9vw, 1.05rem);
+  --fs-brand: clamp(0.95rem, 0.6rem + 1.1vw, 1.4rem);
+  --fs-btn: clamp(0.85rem, 0.6rem + 1vw, 1.15rem);
+  --fs-role: clamp(1rem, 0.4rem + 2vw, 1.7rem);
+  
+  /* PERBAIKAN: Ukuran font hero dikecilkan sedikit */
+  --fs-title-hero: clamp(1.5rem, 0.5rem + 3.5vw, 3.5rem);
+  
+  --fs-title-section: clamp(1.75rem, 0.5rem + 4.2vw, 3rem);
+
+  /* Layout */
+  --container-max: 1100px;
+  --nav-h: clamp(2.5rem, 5vw, 4.5rem);
+  --section-h: clamp(17rem, 63vw, 36rem);
+
+  /* Efek */
+  --radius-pill: 999px;
+  --transition: 0.25s ease;
+
+  /* -----------------------------------------------------
+     PENGATURAN FOTO (UBAH ANGKA DI SINI SAJA)
+     ----------------------------------------------------- */
+  /* HERO */
+  --hero-photo-height: 105%; /* Turunkan jika kepala kepotong, naikkan jika ingin lebih besar */
+  --hero-photo-shift: 35%;   /* Positif = geser ke KANAN, Negatif = geser ke KIRI */
+
+  /* ABOUT */
+  --about-photo-shift: -15%;   /* Positif = geser ke KANAN, Negatif = geser ke KIRI */
+}
+
+
+/* ==========================================================
+   2. RESET & DASAR
+   ========================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Biar klik menu tidak ketutup navbar */
+section[id],
+footer[id] {
+  scroll-margin-top: var(--nav-h);
+}
+
+
+/* ==========================================================
+   3. KOMPONEN UMUM
+   ========================================================== */
+
+/* Container */
+.container {
+  width: min(100% - 2rem, var(--container-max));
+  margin-inline: auto;
+}
+
+/* Sprite ikon disembunyikan */
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Ikon (default: garis / outline) */
+.icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Ikon solid (logo orang) */
+.icon--filled {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Brand / logo */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-primary);
+  font-size: var(--fs-brand);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.brand__icon {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+/* Tombol */
+.btn {
+  display: inline-block;
+  padding: 0.5em 2.2em;
+  border: 0;
+  border-radius: var(--radius-pill);
+  font-family: inherit;
+  font-size: var(--fs-btn);
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    background-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.btn--light {
+  background: var(--color-white);
+  color: var(--color-primary);
+}
+
+.btn--light:hover {
+  background: var(--color-light-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.btn--light:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+
+/* ==========================================================
+   4. NAVBAR
+   ========================================================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-white);
+  transition: box-shadow var(--transition);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--nav-h);
+  gap: 1rem;
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 2.5rem);
+}
+
+.nav__link {
+  position: relative;
+  display: inline-block;
+  padding: 0.25rem 0;
+  color: var(--color-primary);
+  font-size: var(--fs-nav);
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+/* Garis bawah saat hover */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+
+.nav__link:hover {
+  color: var(--color-primary-dark);
+}
+
+.nav__link:hover::after {
+  transform: scaleX(1);
+}
+
+
+/* ==========================================================
+   5. HERO
+   ========================================================== */
+.hero {
+  overflow: hidden;
+  color: var(--color-white);
+  background: linear-gradient(
+    180deg,
+    var(--color-hero-top) 0%,
+    var(--color-hero-bottom) 100%
+  );
+}
+
+/* Grid 2 kolom: teks (kiri) + foto (kanan) */
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: stretch;
+  min-height: var(--section-h);
+}
+
+.hero__content {
+  min-width: 0;
+  align-self: center;
+  padding: 1.5rem 0 1.5rem clamp(1rem, 7vw, 5rem);
+}
+
+.hero__title {
+  font-size: var(--fs-title-hero);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+/* PERBAIKAN: Tambahan white-space: nowrap; */
+.hero__title span {
+  display: block;
+  white-space: nowrap; 
+}
+
+.hero__role {
+  margin: 0.4rem 0 1.75rem;
+  font-size: var(--fs-role);
+  font-weight: 400;
+}
+
+
+/* ----- Slot foto (dipakai hero & about) ----- */
+.photo-slot {
+  position: relative;
+  align-self: stretch;
+}
+
+/* Foto cutout: nempel di bawah section */
+.cutout {
+  position: absolute;
+  bottom: 0;
+  width: auto;
+  height: var(--hero-photo-height);
+  max-width: none;
+  object-fit: contain;
+}
+
+/* Foto Kanan (Hero) */
+.cutout--right {
+  right: 0;
+  transform: translateX(var(--hero-photo-shift));
+  transform-origin: bottom right;
+  object-position: right bottom;
+}
+
+/* Foto Kiri (About) */
+.cutout--left {
+  left: 0;
+  transform: translateX(var(--about-photo-shift));
+  transform-origin: bottom left;
+  object-position: left bottom;
+}
+
+
+/* ==========================================================
+   6. ABOUT
+   ========================================================== */
+.about {
+  overflow: hidden;
+  background: var(--color-bg-soft);
+}
+
+.about__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  align-items: stretch;
+  gap: clamp(1rem, 3vw, 3rem);
+  min-height: var(--section-h);
+}
+
+.about__content {
+  min-width: 0;
+  align-self: center;
+  padding-block: 1.5rem;
+}
+
+.about__title {
+  margin-bottom: 0.4em;
+  color: var(--color-primary);
+  font-size: var(--fs-title-section);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.about__content p {
+  line-height: 1.65;
+}
+
+.about__content p + p {
+  margin-top: 1.2em;
+}
+
+/* About foto ikut disesuaikan tingginya */
+.about .cutout {
+  height: 100%;
+}
+
+
+/* ==========================================================
+   7. FOOTER
+   ========================================================== */
+.footer {
+  background: var(--color-white);
+  color: var(--color-primary);
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding-block: clamp(1.5rem, 4vw, 3rem);
+  padding-inline: clamp(0.5rem, 5vw, 3rem);
+}
+
+.footer__col {
+  min-width: 0;
+}
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.6rem, 2vw, 1rem);
+  margin-top: 0.85rem;
+}
+
+.social__link {
+  display: inline-flex;
+  font-size: clamp(0.95rem, 0.6rem + 1vw, 1.5rem);
+  color: var(--color-primary);
+  transition:
+    color var(--transition),
+    transform var(--transition);
+}
+
+.social__link:hover {
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.footer__links {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.footer__links a {
+  font-size: var(--fs-body);
+  transition: color var(--transition);
+}
+
+.footer__links a:hover,
+.footer__contact a:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+.footer__heading {
+  margin-bottom: 0.25rem;
+  font-size: var(--fs-body);
+  font-weight: 500;
+}
+
+.footer__contact {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.footer__contact a {
+  font-size: var(--fs-small);
+  overflow-wrap: anywhere;
+}
+
+
+/* ==========================================================
+   8. SECTION TAMBAHAN
+   ========================================================== */
+.section {
+  padding-block: clamp(2rem, 6vw, 4rem);
+}
+
+.section__title {
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+  font-size: var(--fs-title-section);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+
+/* ==========================================================
+   9. STATE CLASS (JS)
+   ========================================================== */
+.navbar.is-scrolled {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+.nav__link.is-active {
+  color: var(--color-primary-dark);
+  font-weight: 600;
+}
+
+.nav__link.is-active::after {
+  transform: scaleX(1);
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+
+/* ==========================================================
+   10. RESPONSIF (DIPERBAIKI)
+   ========================================================== */
+@media (max-width: 720px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .hero__content {
+    padding: 2.5rem 0 0;
+    text-align: center;
+  }
+
+  .hero__role {
+    margin-bottom: 1.25rem;
+  }
+
+  .photo-slot {
+    min-height: clamp(16rem, 62vw, 24rem);
+  }
+
+  /* Fotonya ditengahin pas di HP */
+  .cutout {
+    left: 50%;
+    right: auto;
+    height: 100%;
+    object-position: center bottom;
+  }
+
+  /* Geseran untuk Hero di HP */
+  .cutout--right {
+    transform: translateX(-50%) translateX(var(--hero-photo-shift));
+  }
+
+  /* Geseran untuk About di HP */
+  .cutout--left {
+    transform: translateX(-50%) translateX(var(--about-photo-shift));
+  }
+
+  .about__inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+    min-height: 0;
+  }
+
+  .about__content {
+    padding: 0 0 2rem;
+    text-align: center;
+  }
+
+  .about__title {
+    margin-top: 1.5rem;
+  }
+
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    width: min(100% - 1.25rem, var(--container-max));
+  }
+
+  .navbar__inner {
+    gap: 0.5rem;
+  }
+
+  .nav__list {
+    gap: 0.55rem;
+  }
+
+  .nav__link {
+    font-size: 0.72rem;
+  }
+
+  .brand {
+    gap: 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  .brand__icon {
+    width: 1.4em;
+    height: 1.4em;
+  }
+}
+
+
+/* ==========================================================
+   11. AKSESIBILITAS
+   ========================================================== */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

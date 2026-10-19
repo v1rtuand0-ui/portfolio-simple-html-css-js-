@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portofolio Virtuando Jagad Saputrana, Software Engineer.">
+  <title>Virtuando Jagad Saputrana | Software Engineer</title>
+
+  <!-- Font: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- =====================================================
+       SPRITE IKON (SVG)
+       ===================================================== -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-user" viewBox="0 0 24 24">
+      <circle cx="12" cy="7.5" r="4.5"/>
+      <path d="M3 22c0-5 4-8.5 9-8.5s9 3.5 9 8.5z"/>
+    </symbol>
+
+    <symbol id="icon-instagram" viewBox="0 0 24 24">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+    </symbol>
+
+    <symbol id="icon-github" viewBox="0 0 24 24">
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+    </symbol>
+
+    <symbol id="icon-youtube" viewBox="0 0 24 24">
+      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+      <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+    </symbol>
+
+    <symbol id="icon-linkedin" viewBox="0 0 24 24">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+      <rect x="2" y="9" width="4" height="12"/>
+      <circle cx="4" cy="4" r="2"/>
+    </symbol>
+  </svg>
+
+
+  <!-- =====================================================
+       NAVBAR
+       ===================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+
+      <a href="#home" class="brand" aria-label="Virtuando, kembali ke atas">
+        <svg class="icon icon--filled brand__icon" aria-hidden="true"><use href="#icon-user"></use></svg>
+        <span class="brand__name">Virtuando</span>
+      </a>
+
+      <nav aria-label="Navigasi utama">
+        <ul class="nav__list">
+          <li><a href="#home" class="nav__link" data-nav-link>Home</a></li>
+          <li><a href="#projects" class="nav__link" data-nav-link>Projects</a></li>
+          <li><a href="#education" class="nav__link" data-nav-link>Education</a></li>
+          <li><a href="#contact" class="nav__link" data-nav-link>Contact</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =====================================================
+         HERO  (#home)
+         ===================================================== -->
+    <section class="hero" id="home">
+      <div class="container hero__inner">
+
+        <div class="hero__content">
+          <h1 class="hero__title">
+            <span>Virtuando Jagad</span>
+            <span>Saputrana</span>
+          </h1>
+          <p class="hero__role">Software Engineer</p>
+          <a href="#contact" class="btn btn--light" data-action="contact">Contact Me!</a>
+        </div>
+
+        <div class="photo-slot">
+          <img
+            class="cutout cutout--right"
+            src="images/hero-photo.png"
+            alt="Foto Virtuando Jagad Saputrana">
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         ABOUT  (#about)
+         ===================================================== -->
+    <section class="about" id="about">
+      <div class="container about__inner">
+
+        <div class="photo-slot">
+          <img
+            class="cutout cutout--left"
+            src="images/about-photo.png"
+            alt="Foto Virtuando Jagad Saputrana"
+            loading="lazy">
+        </div>
+
+        <div class="about__content">
+          <h2 class="about__title">About me</h2>
+          <p>
+            Halo! Saya Virtuando Jagad Saputrana, seorang Full-Stack Software
+            Engineer. Saya fokus membangun aplikasi web yang cepat, efisien,
+            dan scalable.
+          </p>
+          <p>
+            Tech stack utama saya adalah JavaScript/TypeScript (React, Next.js,
+            Node.js), pengelolaan database (SQL/NoSQL), serta cloud deployment
+            (Docker/AWS). Selalu bersemangat untuk memecahkan masalah lewat
+            kode yang bersih dan berkolaborasi dalam tim. Mari terhubung!
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         PROJECTS  (#projects)  — BELUM ADA DI DESAIN
+         ===================================================== -->
+    <!--
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section__title">Projects</h2>
+        <div class="project-list" data-project-list>
+          ... isi project ...
+        </div>
+      </div>
+    </section>
+    -->
+
+
+    <!-- =====================================================
+         EDUCATION  (#education)  — BELUM ADA DI DESAIN
+         ===================================================== -->
+    <!--
+    <section class="section" id="education">
+      <div class="container">
+        <h2 class="section__title">Education</h2>
+        ... isi pendidikan ...
+      </div>
+    </section>
+    -->
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER  (#contact)
+       ===================================================== -->
+  <footer class="footer" id="contact">
+    <div class="container footer__inner">
+
+      <!-- Kolom 1: logo + sosmed -->
+      <div class="footer__col">
+        <a href="#home" class="brand" aria-label="Virtuando, kembali ke atas">
+          <svg class="icon icon--filled brand__icon" aria-hidden="true"><use href="#icon-user"></use></svg>
+          <span class="brand__name">Virtuando</span>
+        </a>
+
+        <ul class="social">
+          <li>
+            <a href="https://instagram.com/USERNAME_KAMU" class="social__link" data-social="instagram"
+               target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg class="icon" aria-hidden="true"><use href="#icon-instagram"></use></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/USERNAME_KAMU" class="social__link" data-social="github"
+               target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <svg class="icon" aria-hidden="true"><use href="#icon-github"></use></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://youtube.com/@USERNAME_KAMU" class="social__link" data-social="youtube"
+               target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <svg class="icon" aria-hidden="true"><use href="#icon-youtube"></use></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://linkedin.com/in/USERNAME_KAMU" class="social__link" data-social="linkedin"
+               target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg class="icon" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Kolom 2: link menu -->
+      <nav class="footer__col" aria-label="Navigasi footer">
+        <ul class="footer__links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#education">Education</a></li>
+        </ul>
+      </nav>
+
+      <!-- Kolom 3: kontak -->
+      <div class="footer__col">
+        <h2 class="footer__heading">Contact</h2>
+        <ul class="footer__contact">
+          <li><a href="mailto:2501020106@gmail.com" data-contact="email">2501020106@gmail.com</a></li>
+          <li><a href="tel:+6285173382647" data-contact="phone">+62-851-7338-2647</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- =====================================================
+       JAVASCRIPT — BELUM DIPAKAI (tahap 2)
+       ===================================================== -->
+  <!-- <script src="js/script.js" defer></script> -->
+
+</body>
+</html>
